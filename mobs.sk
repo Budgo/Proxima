@@ -101,6 +101,10 @@ function spawnReturn(loc: location):
       if {type::%{_loc}%} = "rattler":
         spawnEntity(skeleton, {_loc}, "&fRattler &63", 25)
         equipEntity(last spawned skeleton, bone)
+        
+      if {type::%{_loc}%} = "bonebarian":
+        spawnEntity(skeleton, {_loc}, "&fBonebarian &67", 45)
+        equipEntity(last spawned skeleton, bone)
 
 function spawnMockReturn(loc: location) :: text:
   spawnReturn({_loc})
