@@ -66,4 +66,9 @@ on death:
         drop 1 stick named "&fTwig" lored "&7Material" at victim
       chance of 20%:
         drop 1 stick named "&fTwig" lored "&7Material" at victim
+        
+    if {_n} contains "Bonebarian":
+      drop {_r2} of gold nuggets at victim
+      chance of 10%:
+        drop 1 bone named "&eTrue Key" lored "&6Key %nl%&7Used in the Sacrificial Altar" at victim
 
