@@ -18,3 +18,49 @@ on right click on dropper:
         set block at loop-value to oak planks
         drawDot count 20, particle "smoke", speed 0.02, XYZ 0.3, 0.3, 0.3, center loop-value, visibleRange 32, pulseDelay 0, keepFor 1 tick
       play sound "block.wood.place" at volume 1 and pitch 1 at event-block
+      
+on right click on smooth stone slab:
+  if "%region at player%" contains "skeleton":
+    if uncolored name of player's held item is "True Key":
+      take 1 of player's held item from player
+      open virtual chest with 3 rows named "Sacrifice." to player
+      format gui slot 0,1,2,3,4,5,6,7,8,9,11,15,17,19,21,24,25 and 26 of player with gray glass pane named "" to do nothing
+      
+      if {truekeys} is 0:
+        add 1 to {truekeys}
+        format gui slot 10 of player with bone named "&cIt begins." to do nothing
+        
+      else if {truekeys} is 1:
+        add 1 to {truekeys}
+        format gui slot 12 of player with bone named "&cYou do not know what you are getting into..." to do nothing
+        
+      else if {truekeys} is 2:
+        add 1 to {truekeys}
+        format gui slot 14 of player with bone named "&cHe cannot be stopped once summoned." to do nothing
+        
+      else if {truekeys} is 3:
+        set {truekeys} to 0
+        format gui slot 16 of player with bone named "&cYou have made a fatal mistake..." to do nothing
+        play sound "entity.wither.break_block" at volume 1 and pitch 0 at event-block
+        
+        wait 2 seconds
+        format gui slot 10 of player with skeleton skull named "&cGoodbye."
+        play sound "entity.wither.break_block" at volume 1 and pitch 0 at event-block
+
+        wait 1 second
+        format gui slot 12 of player with skeleton skull named "&cGoodbye."
+        play sound "entity.wither.break_block" at volume 1 and pitch 0 at event-block
+        
+        wait 1 second
+        format gui slot 14 of player with skeleton skull named "&cGoodbye."
+        play sound "entity.wither.ambient" at volume 1 and pitch 0 at event-block
+        
+        wait 1 second
+        format gui slot 16 of player with skeleton skull named "&cGoodbye."
+        loop all players in 3 blocks:
+          teleport loop-player to {skeletonboss}
+        spawnEntity(skeleton, {skeletonboss}, "The Necromancer", 250)
+        set {_l} to last spawned entity
+        set {_b} to bone of mending 1
+        equipEntity({_l}, {_b}, iron helmet, iron chestplate, air, iron boots)
+        
